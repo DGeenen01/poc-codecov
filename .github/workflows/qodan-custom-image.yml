@@ -20,11 +20,11 @@ jobs:
           registry: registry.jetbrains.team
           username: Alexey.Afanasiev
           password: ${{ secrets.SPACE_PASSWORD }}
-      - run: docker pull registry.jetbrains.team/p/sa/containers/qodana-jvm:latest
+      - run: docker pull registry.jetbrains.team/p/sa/containers/qodana-jvm:sarif-only
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v5.1.0
         with:
-          args: "--linter,registry.jetbrains.team/p/sa/containers/qodana-jvm:latest"
+          args: "--linter,registry.jetbrains.team/p/sa/containers/qodana-jvm:sarif-only,--property,qodana.sarif.only.format=true"
       - name: 'Deploy to GitHub Pages'
         uses: peaceiris/actions-gh-pages@v3
         with:
